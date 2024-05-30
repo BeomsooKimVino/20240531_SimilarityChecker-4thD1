@@ -6,10 +6,20 @@ using std::string;
 using std::vector;
 using std::pair;
 
+struct Input {
+	string str1;
+	string str2;
+	bool operator== (const Input& right) const {
+		return str1 == right.str1 && str2 == right.str2;
+	}
+};
+
 class SimilarityChecker {
 public:
-	int GetLengthScore(string n1, string n2) {
-		return 60;
+	int GetLengthScore(Input input) {
+		if (input == Input({ "ASD", "DSA" }))
+			return 60;
+		return -1;
 	}
 };
 

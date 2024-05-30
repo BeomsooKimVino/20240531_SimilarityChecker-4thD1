@@ -3,6 +3,7 @@
 
 TEST(SimilarityCheckerSuite, SCLength60) {
 	SimilarityChecker sc;
+	Input input = { "ASD", "DSA" };
 	int expected = 60;
-	EXPECT_EQ(expected, sc.GetLengthScore("ASD", "DSA"));
+	EXPECT_EQ(expected, sc.GetLengthScore(input));
 }
