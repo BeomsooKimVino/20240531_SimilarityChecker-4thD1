@@ -14,8 +14,8 @@ struct Input {
 class SimilarityChecker {
 public:
 	int GetLengthScore(Input input) {
-		int strLength1 = input.str1.length();
-		int strLength2 = input.str2.length();
+		int strLength1 = static_cast<int>(input.str1.length());
+		int strLength2 = static_cast<int>(input.str2.length());
 
 		if (strLength1 == strLength2)
 		{
@@ -34,7 +34,11 @@ public:
 
 	int GetApperenceScore(Input input)
 	{
-		return 40;
+		std::sort(input.str1.begin(), input.str1.end());
+		std::sort(input.str2.begin(), input.str2.end());
+		if (input.str1 == input.str2)
+			return 40;
+		return 0;
 	}
 
 private:
