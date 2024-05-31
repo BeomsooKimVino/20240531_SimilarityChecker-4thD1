@@ -14,3 +14,10 @@ TEST(SimilarityCheckerSuite, SCLength0) {
 	int expected = 0;
 	EXPECT_EQ(expected, sc.GetLengthScore(input));
 }
+
+TEST(SimilarityCheckerSuite, SCLengthGapScore20) {
+	SimilarityChecker sc;
+	Input input = { "AAABB", "BAA" };
+	int expected = 20;
+	EXPECT_EQ(expected, sc.GetLengthScore(input));
+}
