@@ -51,4 +51,3 @@ private:
 		return static_cast<int>(MAX_GAPSCORE * gapscoreRational);
 	}
 };
-
