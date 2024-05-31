@@ -42,3 +42,10 @@ TEST(SimilarityCheckerSuite, SCApperenceScore0) {
 	int expected = 0;
 	EXPECT_EQ(expected, sc.GetApperenceScore(input));
 }
+
+TEST(SimilarityCheckerSuite, SCApperenceScore40SameAlpha) {
+	SimilarityChecker sc;
+	Input input = { "AAABB", "BA" };
+	int expected = 40;
+	EXPECT_EQ(expected, sc.GetApperenceScore(input));
+}
