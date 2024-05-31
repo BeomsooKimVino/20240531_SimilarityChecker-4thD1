@@ -1,27 +1,25 @@
 #include <iostream>
-#include <vector>
 #include <string>
+#include <algorithm>
 
 using std::string;
-using std::vector;
 using std::pair;
 
 struct Input {
 	string str1;
 	string str2;
-	bool operator== (const Input& right) const {
-		return str1 == right.str1 && str2 == right.str2;
-	}
 };
 
 class SimilarityChecker {
 public:
 	int GetLengthScore(Input input) {
-		if (input == Input({ "ASD", "DSA" }))
+		std::sort(input.str1.begin(), input.str1.end());
+		std::sort(input.str2.begin(), input.str2.end());
+
+		if (input.str1 == input.str2)
 			return 60;
-		else if (input == Input({ "A", "BB" }))
+		else
 			return 0;
-		return -1;
 	}
 };
 
