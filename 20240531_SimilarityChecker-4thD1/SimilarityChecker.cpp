@@ -13,16 +13,26 @@ struct Input {
 class SimilarityChecker {
 public:
 	int GetLengthScore(Input input) {
-		if (input.str1 == "AAABB" && input.str2 == "BAA")
-			return 20;
-
 		std::sort(input.str1.begin(), input.str1.end());
 		std::sort(input.str2.begin(), input.str2.end());
 
 		if (input.str1 == input.str2)
+		{
 			return 60;
-		else
+		}
+		else if (input.str1.length() >= input.str2.length() * 2
+			|| input.str2.length() >= input.str1.length() * 2)
+		{
 			return 0;
+		}
+		else
+		{
+			int gap = input.str1.length() - input.str2.length();
+			if (gap < 0)
+				gap *= -1;
+			int minLength = std::min(input.str1.length(), input.str2.length());
+			return static_cast<int>(60 * (1 - static_cast<double>(gap) / minLength));
+		}
 	}
 };
 
