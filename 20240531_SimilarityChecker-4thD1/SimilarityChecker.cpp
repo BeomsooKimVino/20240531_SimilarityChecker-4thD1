@@ -36,31 +36,15 @@ public:
 
 	int GetApperenceScore(Input input)
 	{
-		if (input.str1 == "AA" && input.str2 == "AAB") return 20;
+		unordered_set<char> usedAlpha1 = GetUsedUniqueAlphaSet(input.str1);
+		unordered_set<char> usedAlpha2 = GetUsedUniqueAlphaSet(input.str2);
 
-		std::sort(input.str1.begin(), input.str1.end());
-		std::sort(input.str2.begin(), input.str2.end());
-		if (input.str1 == input.str2)
-			return MAX_APPERENCE_SCORE;
-
-		unordered_set<char> usedAlpha;
-		for (char& used : input.str1)
-		{
-			usedAlpha.insert(used);
-		}
-
-		int totalAlphaCnt = usedAlpha.size();
+		int totalAlphaCnt = usedAlpha1.size();
 		int samelAlphaCnt = 0;
-		for (char& used : input.str2)
+		for (char used : usedAlpha2)
 		{
-			if (usedAlpha.find(used) == usedAlpha.end())
-			{
-				totalAlphaCnt++;
-			}
-			else
-			{
-				samelAlphaCnt++;
-			}
+			if (IsNotApperence(usedAlpha1, used)) totalAlphaCnt++;
+			else samelAlphaCnt++;
 		}
 
 		return MAX_APPERENCE_SCORE * (static_cast<double>(samelAlphaCnt) / totalAlphaCnt);
@@ -69,6 +53,7 @@ public:
 private:
 	const int MAX_GAP_SCORE = 60;
 	const int MAX_APPERENCE_SCORE = 40;
+
 	int GetGapScore(int strLength1, int strLength2)
 	{
 		int gap = std::abs(strLength1 - strLength2);
@@ -76,4 +61,20 @@ private:
 		double gapscoreRational = 1 - (static_cast<double>(gap) / minLength);
 		return static_cast<int>(MAX_GAP_SCORE * gapscoreRational);
 	}
+
+	bool IsNotApperence(std::unordered_set<char>& usedAlpha, char& used)
+	{
+		return usedAlpha.find(used) == usedAlpha.end();
+	}
+
+	std::unordered_set<char> GetUsedUniqueAlphaSet(string& str)
+	{
+		std::unordered_set<char> usedAlpha;
+		for (char& used : str)
+		{
+			usedAlpha.insert(used);
+		}
+		return usedAlpha;
+	}
+
 };
