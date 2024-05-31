@@ -1,10 +1,8 @@
 #include <iostream>
 #include <string>
-#include <algorithm>
 #include <cmath>
 
 using std::string;
-using std::pair;
 
 struct Input {
 	string str1;
