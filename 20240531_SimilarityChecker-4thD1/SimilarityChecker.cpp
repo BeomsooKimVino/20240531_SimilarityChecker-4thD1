@@ -2,9 +2,11 @@
 #include <string>
 #include <algorithm>
 #include <cmath>
+#include <unordered_set>
 
 using std::string;
 using std::pair;
+using std::unordered_set;
 
 struct Input {
 	string str1;
@@ -34,15 +36,32 @@ public:
 
 	int GetApperenceScore(Input input)
 	{
-		if (input.str1 == "AAABB" && input.str2 == "BA")
-			return 40;
-
-
 		std::sort(input.str1.begin(), input.str1.end());
 		std::sort(input.str2.begin(), input.str2.end());
 		if (input.str1 == input.str2)
 			return MAX_APPERENCE_SCORE;
-		return 0;
+
+		unordered_set<char> usedAlpha;
+		for (char& used : input.str1)
+		{
+			usedAlpha.insert(used);
+		}
+
+		int totalAlphaCnt = usedAlpha.size();
+		int samelAlphaCnt = 0;
+		for (char& used : input.str2)
+		{
+			if (usedAlpha.find(used) == usedAlpha.end())
+			{
+				totalAlphaCnt++;
+			}
+			else
+			{
+				samelAlphaCnt++;
+			}
+		}
+
+		return MAX_APPERENCE_SCORE * (static_cast<double>(samelAlphaCnt)/totalAlphaCnt);
 	}
 
 private:
