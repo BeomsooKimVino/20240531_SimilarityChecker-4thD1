@@ -32,6 +32,11 @@ public:
 		}
 	}
 
+	int GetApperenceScore(Input input)
+	{
+		return 40;
+	}
+
 private:
 	const int MAX_GAPSCORE = 60;
 	int GetGapScore(int strLength1, int strLength2)
