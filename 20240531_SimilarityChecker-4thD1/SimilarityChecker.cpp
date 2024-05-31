@@ -18,19 +18,15 @@ public:
 		int strLength1 = static_cast<int>(input.str1.length());
 		int strLength2 = static_cast<int>(input.str2.length());
 
-		if (strLength1 == strLength2)
-		{
-			return 60;
-		}
-		else if (strLength1 >= strLength2 * 2
-			|| strLength2 >= strLength1 * 2)
-		{
+		int longerLength = std::max(strLength1, strLength2);
+		int shorterLength = std::min(strLength1, strLength2);
+
+		if (longerLength == shorterLength)
+			return MAX_APPERENCE_SCORE;
+		else if (longerLength >= shorterLength * 2)
 			return 0;
-		}
 		else
-		{
-			return GetGapScore(strLength1, strLength2);
-		}
+			return GetGapScore(longerLength, shorterLength);
 	}
 
 	int GetApperenceScore(Input input)
@@ -49,11 +45,10 @@ private:
 	const int MAX_GAP_SCORE = 60;
 	const int MAX_APPERENCE_SCORE = 40;
 
-	int GetGapScore(int strLength1, int strLength2)
+	int GetGapScore(int longerLength, int shorterLength)
 	{
-		int gap = std::abs(strLength1 - strLength2);
-		int minLength = std::min(strLength1, strLength2);
-		double gapscore = MAX_GAP_SCORE * (minLength - static_cast<double>(gap)) / minLength;
+		int gap = longerLength - shorterLength;
+		double gapscore = MAX_GAP_SCORE * (shorterLength - static_cast<double>(gap)) / shorterLength;
 		return static_cast<int>(gapscore);
 	}
 

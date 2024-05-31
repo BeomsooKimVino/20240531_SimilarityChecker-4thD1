@@ -8,6 +8,7 @@ public:
 	{
 		EXPECT_EQ(expected, sc.GetLengthScore(input));
 	}
+
 	void CheckApperenceScore(Input input, int expected)
 	{
 		EXPECT_EQ(expected, sc.GetApperenceScore(input));
