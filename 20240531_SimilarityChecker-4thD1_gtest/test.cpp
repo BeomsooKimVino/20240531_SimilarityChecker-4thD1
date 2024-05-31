@@ -7,3 +7,10 @@ TEST(SimilarityCheckerSuite, SCLength60) {
 	int expected = 60;
 	EXPECT_EQ(expected, sc.GetLengthScore(input));
 }
+
+TEST(SimilarityCheckerSuite, SCLength0) {
+	SimilarityChecker sc;
+	Input input = { "A", "BB" };
+	int expected = 0;
+	EXPECT_EQ(expected, sc.GetLengthScore(input));
+}

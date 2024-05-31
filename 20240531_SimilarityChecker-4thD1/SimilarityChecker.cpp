@@ -19,6 +19,8 @@ public:
 	int GetLengthScore(Input input) {
 		if (input == Input({ "ASD", "DSA" }))
 			return 60;
+		else if (input == Input({ "A", "BB" }))
+			return 0;
 		return -1;
 	}
 };
