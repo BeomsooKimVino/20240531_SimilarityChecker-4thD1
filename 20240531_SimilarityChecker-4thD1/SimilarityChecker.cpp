@@ -42,19 +42,7 @@ public:
 		int totalAlphaCnt = alphaCnt.first;
 		int samelAlphaCnt = alphaCnt.second;
 
-		return MAX_APPERENCE_SCORE * (static_cast<double>(samelAlphaCnt) / totalAlphaCnt);
-	}
-
-	pair<int, int> GetAlphaCnt(std::unordered_set<char>& usedAlpha2, std::unordered_set<char>& usedAlpha1)
-	{
-		int totalAlphaCnt = usedAlpha1.size();
-		int samelAlphaCnt = 0;
-		for (char used : usedAlpha2)
-		{
-			if (IsNotApperence(usedAlpha1, used)) totalAlphaCnt++;
-			else samelAlphaCnt++;
-		}
-		return { totalAlphaCnt, samelAlphaCnt };
+		return (MAX_APPERENCE_SCORE * static_cast<double>(samelAlphaCnt) / totalAlphaCnt);
 	}
 
 private:
@@ -65,8 +53,8 @@ private:
 	{
 		int gap = std::abs(strLength1 - strLength2);
 		int minLength = std::min(strLength1, strLength2);
-		double gapscoreRational = 1 - (static_cast<double>(gap) / minLength);
-		return static_cast<int>(MAX_GAP_SCORE * gapscoreRational);
+		double gapscore = MAX_GAP_SCORE * (minLength - static_cast<double>(gap)) / minLength;
+		return static_cast<int>(gapscore);
 	}
 
 	bool IsNotApperence(std::unordered_set<char>& usedAlpha, char& used)
@@ -82,6 +70,18 @@ private:
 			usedAlpha.insert(used);
 		}
 		return usedAlpha;
+	}
+
+	pair<int, int> GetAlphaCnt(std::unordered_set<char>& usedAlpha2, std::unordered_set<char>& usedAlpha1)
+	{
+		int totalAlphaCnt = usedAlpha1.size();
+		int samelAlphaCnt = 0;
+		for (char used : usedAlpha2)
+		{
+			if (IsNotApperence(usedAlpha1, used)) totalAlphaCnt++;
+			else samelAlphaCnt++;
+		}
+		return { totalAlphaCnt, samelAlphaCnt };
 	}
 
 };
